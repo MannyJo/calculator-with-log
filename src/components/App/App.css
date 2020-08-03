@@ -1,0 +1,28 @@
+.calcContainer {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.title {
+    text-align: center;
+}
+
+.calcScreen {
+    box-sizing: border-box;
+    width: 100%;
+
+    padding: 10px 5px;
+    text-align: right;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+
+    margin-top: 10px;
+}
+
+.keypad > button {
+    width: 100%;
+    height: 50px;
+}
