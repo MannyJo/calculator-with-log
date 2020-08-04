@@ -1,4 +1,5 @@
 import React from 'react';
+import './CalcScreen.css';
 
 const CalcScreen = ({ result }) => {
     return (
