@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const pool = require('./modules/pool');
 
 const app = express();
 
@@ -20,9 +21,22 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
     socket.on('expression', (expression) => {
-        console.log(expression);
+        pool.query(`
+            INSERT INTO "expression_log" ( "expression" )
+            VALUES ( $1 );
+        `, [ expression ])
+        .then( () => {
+            pool.query(`SELECT expression FROM "expression_log" ORDER BY created DESC LIMIT 10;`)
+            .then(results => {
+                io.emit('expressions', results.rows);
+            }).catch(err => {
+                console.log('Error with getting expressions :', err);
+            });
+        }).catch(err => {
+            console.log('Error with inserting expression :', err);
+        });
     });
-    
+
     socket.on('disconnect', () => {
         console.log('disconnected');
     });
