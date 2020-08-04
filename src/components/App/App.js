@@ -1,23 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { evaluate } from 'mathjs';
+import axios from 'axios';
 import Keypad from '../Keypad/Keypad';
 import CalcScreen from '../CalcScreen/CalcScreen';
+import CalcLog from '../CalcLog/CalcLog';
 import './App.css';
 
 let socket;
 
 function App() {
   const [ result, setResult ] = useState('0');
+  const [ results, setResults ] = useState([]);
+  const [ initiated, isInitiated ] = useState(false);
 
   useEffect(() => {
-    initSocket();
-  });
+    if(!initiated) {
+      initSocket();
+      initResults();
+      isInitiated(true);
+    }
+  }, [ initiated ]);
+
+  useEffect(() => {
+    socket.on('expressions', expressions => {
+      setResults(expressions);
+    });
+
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
+  }, [ results ]);
 
   const initSocket = () => {
     if(socket === null || socket === undefined) {
       socket = io();
     }
+  }
+
+  const initResults = () => {
+    axios.get('http://localhost:5000/results')
+    .then(results => {
+      setResults(results.data);
+    }).catch(err => {
+      console.log('Error with getting results from server :', err);
+    });
   }
 
   const btnClick = button => () => {
@@ -51,6 +79,7 @@ function App() {
       <h1 className="title">Calculator</h1>
       <CalcScreen result={result} />
       <Keypad btnClick={btnClick} />
+      <CalcLog results={results} />
     </div>
   );
 }
