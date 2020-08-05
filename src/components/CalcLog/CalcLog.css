@@ -1,0 +1,25 @@
+.logTitle {
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.logList {
+    margin-top: 10px;
+    background: #333333;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.logItem {
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.logItem:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}

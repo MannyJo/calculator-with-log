@@ -1,15 +1,15 @@
 import React from 'react';
+import './CalcLog.css';
 
 const CalcLog = ({ results }) => {
     return (
-        <div>
-            <ul>
-                {
-                    results.map((result, i) => (
-                        <li key={i}>{result.expression}</li>
-                    ))
-                }
-            </ul>
+        <div className="logList">
+            <div className="logTitle">Log</div>
+            {
+                results.map((result, i) => (
+                    <div className="logItem" key={i}>{result.expression}</div>
+                ))
+            }
         </div>
     );
 }
