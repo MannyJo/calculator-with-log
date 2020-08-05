@@ -75,11 +75,17 @@ function App() {
   }
 
   return (
-    <div className="calcContainer">
+    <div className="container">
       <h1 className="title">Calculator</h1>
-      <CalcScreen result={result} />
-      <Keypad btnClick={btnClick} />
-      <CalcLog results={results} />
+      <div className="mainContainer">
+        <div className="itemContainer">
+          <CalcScreen result={result} />
+          <Keypad btnClick={btnClick} />
+        </div>
+        <div className="itemContainer">
+          <CalcLog results={results} />
+        </div>
+      </div>
     </div>
   );
 }
