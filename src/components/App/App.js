@@ -10,6 +10,7 @@ import './App.css';
 let socket;
 
 function App() {
+  const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://calculator-with-log.herokuapp.com' : 'http://localhost:5000';
   const [ result, setResult ] = useState('0');
   const [ results, setResults ] = useState([]);
   const [ initiated, isInitiated ] = useState(false);
@@ -40,7 +41,7 @@ function App() {
   }
 
   const initResults = () => {
-    axios.get('http://localhost:5000/results')
+    axios.get(`${BASE_URL}/results`)
     .then(results => {
       setResults(results.data);
     }).catch(err => {
