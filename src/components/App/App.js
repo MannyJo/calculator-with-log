@@ -8,9 +8,9 @@ import CalcLog from '../CalcLog/CalcLog';
 import './App.css';
 
 let socket;
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://calculator-with-log.herokuapp.com' : 'http://localhost:5000';
 
 function App() {
-  const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://calculator-with-log.herokuapp.com' : 'http://localhost:5000';
   const [ result, setResult ] = useState('0');
   const [ results, setResults ] = useState([]);
   const [ initiated, isInitiated ] = useState(false);
@@ -36,7 +36,7 @@ function App() {
 
   const initSocket = () => {
     if(socket === null || socket === undefined) {
-      socket = io();
+      socket = io(BASE_URL);
     }
   }
 
