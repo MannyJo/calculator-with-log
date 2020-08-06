@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('build'));
 
+app.get('/', (req, res) => {
+    res.send("Server is running!");
+});
+
 app.get('/results', (req, res) => {
     pool.query(`SELECT expression FROM "expression_log" ORDER BY created DESC LIMIT 10;`)
     .then(results => {
