@@ -11,11 +11,7 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server": "nodemon --watch server server/server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
