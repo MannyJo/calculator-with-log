@@ -13,7 +13,7 @@ if(process.env.DATABASE_URL) {
         host: params.hostname,
         port: params.port,
         database: params.pathname.split('/')[1],
-        ssl: false,
+        ssl: true,
         max: 10,
         idleTimeoutMillis: 30000
     }
