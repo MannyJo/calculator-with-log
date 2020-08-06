@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const pool = require('./modules/pool');
@@ -8,12 +9,17 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 5000;
+const publicPath = path.join(__dirname, '..', 'public');
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('build'));
+app.use(express.static(publicPath));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 app.get('/results', (req, res) => {
     pool.query(`SELECT expression FROM "expression_log" ORDER BY created DESC LIMIT 10;`)
