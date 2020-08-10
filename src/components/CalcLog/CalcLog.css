@@ -5,6 +5,27 @@
     font-weight: bold;
 }
 
+.logResetBtnDiv {
+    position: relative;
+}
+
+.logResetBtnDiv > button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    border-radius: 5px;
+    background: white;
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.logResetBtnDiv > button:hover {
+    background: rgb(99, 99, 99);
+    color: white;
+}
+
 .logList {
     background: #333333;
     color: white;

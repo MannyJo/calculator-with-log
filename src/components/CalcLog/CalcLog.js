@@ -1,10 +1,25 @@
 import React from 'react';
+import axios from 'axios';
 import './CalcLog.css';
 
-const CalcLog = ({ results }) => {
+const CalcLog = ({ results, BASE_URL, initResults }) => {
+    const resetLog = () => {
+        axios.delete(BASE_URL + '/deleteAll')
+        .then(results => {
+            initResults();
+        }).catch(err => {
+            console.log('Error with deleting expressions :', err);
+        });
+    }
+
     return (
         <div className="logList">
-            <div className="logTitle">Log</div>
+            <div className="logResetBtnDiv">
+                <button onClick={resetLog}>Reset</button>
+            </div>
+            <div className="logTitle">
+                <span>Log</span>
+            </div>
             {
                 results.map((result, i) => (
                     <div className="logItem" key={i}>{result.expression}</div>
