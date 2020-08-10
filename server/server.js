@@ -29,6 +29,16 @@ app.get('/results', (req, res) => {
     });
 });
 
+app.delete('/deleteAll', (req, res) => {
+    pool.query(`DELETE FROM "expression_log";`)
+    .then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log('Error with deleting expressions :', err);
+        res.sendStatus(500);
+    });
+});
+
 io.on('connection', socket => {
     socket.on('expression', (expression) => {
         pool.query(`
