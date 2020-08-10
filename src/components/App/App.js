@@ -84,7 +84,11 @@ function App() {
           <Keypad btnClick={btnClick} />
         </div>
         <div className="itemContainer">
-          <CalcLog results={results} />
+          <CalcLog 
+            results={results} 
+            BASE_URL={BASE_URL}
+            initResults={initResults}
+          />
         </div>
       </div>
     </div>
