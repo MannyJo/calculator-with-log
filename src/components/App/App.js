@@ -88,6 +88,7 @@ function App() {
             results={results} 
             BASE_URL={BASE_URL}
             initResults={initResults}
+            socket={socket}
           />
         </div>
       </div>
