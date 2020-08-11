@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import './CalcLog.css';
 
-const CalcLog = ({ results, BASE_URL, initResults }) => {
+const CalcLog = ({ results, BASE_URL, initResults, socket }) => {
     const resetLog = () => {
         axios.delete(BASE_URL + '/deleteAll')
-        .then(results => {
+        .then(() => {
             initResults();
+            socket.emit('get expressions');
         }).catch(err => {
             console.log('Error with deleting expressions :', err);
         });
