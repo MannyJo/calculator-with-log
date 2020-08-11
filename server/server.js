@@ -57,6 +57,15 @@ io.on('connection', socket => {
         });
     });
 
+    socket.on('get expressions', () => {
+        pool.query(`SELECT expression FROM "expression_log" ORDER BY created DESC LIMIT 10;`)
+        .then(results => {
+            io.emit('expressions', results.rows);
+        }).catch(err => {
+            console.log('Error with getting expressions :', err);
+        });
+    });
+
     socket.on('disconnect', () => {
         console.log('disconnected');
     });
